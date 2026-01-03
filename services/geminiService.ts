@@ -8,6 +8,13 @@ const parseRiskLevel = (score: number): RiskLevel => {
   return RiskLevel.MALICIOUS;
 };
 
+const cleanJsonString = (str: string): string => {
+  if (!str) return "{}";
+  // Remove markdown code blocks if present (```json ... ```)
+  let cleaned = str.replace(/```json/g, "").replace(/```/g, "");
+  return cleaned.trim();
+};
+
 export const analyzeUrlWithGemini = async (url: string): Promise<AnalysisResult> => {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
@@ -70,7 +77,8 @@ export const analyzeUrlWithGemini = async (url: string): Promise<AnalysisResult>
       throw new Error("No response from AI");
     }
 
-    const data = JSON.parse(jsonText);
+    const cleanedJson = cleanJsonString(jsonText);
+    const data = JSON.parse(cleanedJson);
 
     return {
       url,
@@ -84,13 +92,15 @@ export const analyzeUrlWithGemini = async (url: string): Promise<AnalysisResult>
 
   } catch (error) {
     console.error("Gemini Analysis Error:", error);
+    
+    // Provide a more graceful fallback that doesn't just say "Error"
     return {
       url,
       riskScore: 0,
       riskLevel: RiskLevel.UNKNOWN,
-      threatType: "Error",
-      explanation: "We could not reach the analysis server. Please check your internet connection and try again.",
-      technicalFlags: ["Connection Error"],
+      threatType: "Analysis Unavailable",
+      explanation: "We could not verify this link at the moment. This could be due to network issues or service availability. Please be cautious.",
+      technicalFlags: ["Service Temporarily Unavailable"],
       analyzedAt: new Date().toISOString(),
     };
   }

@@ -1,20 +1,49 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# SentinelLink - Enterprise URL Intelligence
 
-# Run and deploy your AI Studio app
+An advanced AI-powered URL analysis tool that detects phishing, malware, and malicious links using deep heuristic scanning and Google Gemini intelligence.
 
-This contains everything you need to run your app locally.
+## Prerequisites
 
-View your app in AI Studio: https://ai.studio/apps/drive/1gA2w9H1-1rmna6v0OdouOGKnNCgi8Ri5
+- [Node.js](https://nodejs.org/) (Version 16 or higher)
+- A Google Gemini API Key
 
-## Run Locally
+## Installation
 
-**Prerequisites:**  Node.js
+1.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
+2.  **Configure API Key:**
+    Create a `.env` file in the root directory and add your Google Gemini API key:
+    ```env
+    API_KEY=your_actual_api_key_here
+    ```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Commands
+
+### Start Development Server
+Runs the app in development mode. Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+```bash
+npm run dev
+```
+
+### Build for Production
+Builds the app for production to the `dist` folder.
+```bash
+npm run build
+```
+
+### Preview Production Build
+Locally preview the production build.
+```bash
+npm run preview
+```
+
+## Technologies Used
+
+- **Frontend:** React, TypeScript, Vite
+- **Styling:** Tailwind CSS (via CDN)
+- **AI Model:** Google Gemini (@google/genai)
+- **Visualization:** Recharts
+- **Icons:** Lucide React
