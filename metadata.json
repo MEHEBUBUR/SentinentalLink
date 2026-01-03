@@ -1,0 +1,5 @@
+{
+  "name": "SentinelLink",
+  "description": "An advanced AI-powered URL analysis tool that detects phishing, malware, and malicious links using deep heuristic scanning and Gemini intelligence.",
+  "requestFramePermissions": []
+}
